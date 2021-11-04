@@ -3,7 +3,7 @@
 // 2. prendo ogni singolo oggetto dell'arrey e li inserisco dentro a delle variabili => for => for in => ok
 // 3.  Prendendo come riferimento il layout di esempio presente nell’html, stampiamo tutte le card del nostro team => innerHTML => ok
 const stamp = document.getElementById("cont");
-
+const addBtn = document.getElementById("addMemberButton");
 
 
 let members = [
@@ -39,6 +39,8 @@ let members = [
     }
 ];
 
+let newMember;
+
 for (let i = 0; i < members.length; i++){
 
     let nameEmpl = '';
@@ -68,6 +70,57 @@ for (let i = 0; i < members.length; i++){
         </div>
     
     `
+
+}
+
+addBtn.addEventListener("click",
+        function(){
+            addMember (newMember, members);
+        }
+    );
+
+
+//funzione 
+//al click aggiungere un membro
+
+function addMember (newCard, pushArrey){
+
+    //salvo i dati che mi da il form
+    let newName = document.getElementById("name").value;
+    let newRole = document.getElementById("role").value;
+    let newPhoto = document.getElementById("image").value;
+
+    //al click creo la nuova carta
+    newCard = {
+        "nameMember" : newName,
+        "roleMemeber" : newRole,
+        "imgMember" : newPhoto
+
+    };
+
+    console.log(newCard);
+    pushArrey.push(newCard);
+
+        stamp.innerHTML += `
+            <div class="team-card">
+                <div class="card-image">
+                    <img
+                    src="${newCard.imgMember}"
+                    alt="${newCard.nameMember}"
+                    />
+                </div>
+                <div class="card-text">
+                    <h3>${newCard.nameMember}</h3>
+                    <p>${newCard.roleMemeber}</p>
+                </div>
+            </div>
+
+            `
+
+
+
+
+
 }
 
 
